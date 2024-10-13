@@ -1,0 +1,50 @@
+---
+title: "Anomaly Detection and Isolation Forest"
+author: 
+  - 🌲 Dr. Fei Tony Liu 🌲
+format: 
+  revealjs:
+    multiplex: true
+    theme: [ pp.scss]
+    slide-number: c/t
+    incremental: true
+    title-slide-attributes:
+      data-background-image: img/image-77fixed.png
+      data-background-size: cover  
+editor: visual
+---
+
+## Introduction
+
+::: columns
+::: {.column width="40%"}
+
+![Outliers](img/happyoutlier.jpg)  <!-- Happy outliers -->
+:::
+
+::: {.column width="60%"}
+
+-  Anomaly detection is the process of identifying patterns in data that do not conform to expected behavior. 
+
+-  The definition of an anomaly is that it is unusual (or not normal).
+
+-  This definition is super-helpful (sarcasm)!
+
+:::
+:::
+
+
+## Bullets
+
+When you click the **Render** button a document will be generated that includes:
+
+-   Content authored with markdown
+-   Output from executable code
+
+## Code
+
+When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```

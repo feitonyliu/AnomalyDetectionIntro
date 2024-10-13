@@ -1,0 +1,16 @@
+/*-- scss:rules --*/
+#title-slide {
+  .title {
+    font-size: 3em;
+    color: #ffffff;
+  }
+
+  .subtitle {
+    font-size: 2em;
+  }
+
+  .quarto-title-author {
+    font-size: 1.5em;
+    color: #ffffff;
+  }
+}

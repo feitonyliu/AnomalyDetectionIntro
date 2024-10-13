@@ -24,23 +24,35 @@ editor: visual
 
 ::: {.column width="60%"}
 
--  Anomaly detection is the process of identifying patterns in data that do not conform to expected behavior. 
+*   Anomaly detection is the process of identifying patterns in data that do not conform to expected behavior. 
 
--  The definition of an anomaly is that it is unusual (or not normal).
+*   The definition of an anomaly is that it is unusual (or not normal).
 
--  This definition is super-helpful (sarcasm)!
+*   This definition is super-helpful (sarcasm)!
 
 :::
 :::
 
 
-## Bullets
+## Motivation, Why should you care? 
 
-When you click the **Render** button a document will be generated that includes:
+::: columns
+::: {.column width="60%"}
 
--   Content authored with markdown
--   Output from executable code
 
+* Business Opportunity: Australia’s anti-money laundering and counter-terrorism financing reform is coming soon...
+    + System Modernization 
+    + Scope to include trench 2 entries  (real estate professionals, lawyers, accountants, trust and company service providers)
+    
+* Enrich your knowledge: Anomaly Detection is one of main branches of Data Mining, beside Supervised Learning, Clustering and Association Rules.
+
+:::
+
+::: {.column width="40%"}
+![Anti-Money Laundering](img/anti-money-laundering.png)  
+
+:::
+:::
 ## Code
 
 When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:

@@ -29,7 +29,27 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -345,19 +365,22 @@
 </div><div class="column" style="width:60%;">
 <ul>
 <li class="fragment"><p>Anomaly detection is the process of identifying patterns in data that do not conform to expected behavior.</p></li>
-<li class="fragment"><p>The definition of an anomaly is that it is unusual (or not normal).</p></li>
-<li class="fragment"><p>This definition is super-helpful (sarcasm)!</p></li>
+<li class="fragment"><p>The definition of an anomaly is that it is unusual (or not normal).</p>
+<ul>
+<li class="fragment">This definition is super-helpful (sarcasm)!</li>
+</ul></li>
+<li class="fragment"><p>Formal definition “Anomaly detection refers to the problem of finding patterns in data that do not conform to expected behavior.” <span class="citation" data-cites="chandola2009anomaly">(<a href="#/questions" role="doc-biblioref" onclick="">Chandola, Banerjee, and Kumar 2009</a>)</span></p></li>
 </ul>
 </div></div>
 </section>
-<section id="motivation-why-should-you-care" class="slide level2">
-<h2>Motivation, Why should you care?</h2>
+<section id="why-should-you-care" class="slide level2">
+<h2>Why should you care?</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
 <ul>
 <li class="fragment">Business Opportunity: Australia’s anti-money laundering and counter-terrorism financing reform is coming soon…
 <ul>
-<li class="fragment">Modernization</li>
+<li class="fragment">System Modernization</li>
 <li class="fragment">Scope to include trench 2 entries (real estate professionals, lawyers, accountants, trust and company service providers)</li>
 </ul></li>
 <li class="fragment">Enrich your knowledge: Anomaly Detection is one of main branches of Data Mining, beside Supervised Learning, Clustering and Association Rules.</li>
@@ -371,17 +394,44 @@
 </div>
 </div></div>
 </section>
-<section id="code" class="slide level2">
-<h2>Code</h2>
-<p>When you click the <strong>Render</strong> button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
-</div>
-</div>
+<section id="what-are-anomalies" class="slide level2">
+<h2>What are Anomalies?</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>A simple example of anomalies in a 2-dimensional dataset <img data-src="img/2Danomalies.png" alt="A Simple example of anomalies in a 2-dimensional dataset."></p>
+</div><div class="column" style="width:50%;">
+<p>A simple example of anomalies in a 2-dimensional dataset. <span class="math inline">\(N_1\)</span> and <span class="math inline">\(N_1\)</span> are normal regions. <span class="math inline">\(o_1\)</span> and <span class="math inline">\(o_2\)</span> are points that are sufficiently far away from these regions. <span class="math inline">\(o_3\)</span> are clustered anomalies.</p>
+<h4 id="examples-of-real-life-anomalies">Examples of real-life anomalies:</h4>
+<ul>
+<li class="fragment">Credit card frauds</li>
+<li class="fragment">Insurance frauds</li>
+<li class="fragment">Cyber-intrusions</li>
+<li class="fragment">Terrorist activities</li>
+<li class="fragment">System breakdowns</li>
+</ul>
+</div></div>
+</section>
+<section id="challenges-of-anomaly-detection" class="slide level2">
+<h2>Challenges of Anomaly Detection</h2>
+<ul>
+<li class="fragment">Defining a normal region which encompasses every possible normal behavior is very difficult.</li>
+<li class="fragment">The Masking and Swamping problems - Anoamlies are hidding among normal points or increase their frequency to appear like normal points.</li>
+<li class="fragment">The concept draft problem - normal/anomaly behavior keeps evolving.</li>
+<li class="fragment">The notions of anomaly are different for different applications.</li>
+<li class="fragment">Availability of labelled data is a major issue - for training/validation of models.</li>
+<li class="fragment">Often data naturally contains noise, which are very similar to anomalies. <span class="citation" data-cites="chandola2009anomaly">(<a href="#/questions" role="doc-biblioref" onclick="">Chandola, Banerjee, and Kumar 2009</a>)</span></li>
+</ul>
+</section>
+<section id="questions" class="slide level2 smaller scrollable">
+<h2>Questions</h2>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
+</div>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-chandola2009anomaly" class="csl-entry" role="listitem">
+Chandola, Varun, Arindam Banerjee, and Vipin Kumar. 2009. <span>“Anomaly Detection: A Survey.”</span> <em>ACM Computing Surveys (CSUR)</em> 41 (3): 15. <a href="http://scholar.google.de/scholar.bib?q=info:jAfBmk-9uAcJ:scholar.google.com/&amp;output=citation&amp;hl=de&amp;ct=citation&amp;cd=0">http://scholar.google.de/scholar.bib?q=info:jAfBmk-9uAcJ:scholar.google.com/&amp;output=citation&amp;hl=de&amp;ct=citation&amp;cd=0</a>.
 </div>
 </div>
 </section>
@@ -598,82 +648,6 @@
         ]
       });
     </script>
-    
-
-    <script>
-
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-
-      // slide changes (different for each slide format).
-
-      (function () {
-
-        // dispatch for htmlwidgets
-
-        function fireSlideEnter() {
-
-          const event = window.document.createEvent("Event");
-
-          event.initEvent("slideenter", true, true);
-
-          window.document.dispatchEvent(event);
-
-        }
-
-    
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-
-          fireSlideEnter();
-
-    
-
-          // dispatch for shiny
-
-          if (window.jQuery) {
-
-            if (previousSlide) {
-
-              window.jQuery(previousSlide).trigger("hidden");
-
-            }
-
-            if (currentSlide) {
-
-              window.jQuery(currentSlide).trigger("shown");
-
-            }
-
-          }
-
-        }
-
-    
-
-        // hookup for slidy
-
-        if (window.w3c_slidy) {
-
-          window.w3c_slidy.add_observer(function (slide_num) {
-
-            // slide_num starts at position 1
-
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-
-          });
-
-        }
-
-    
-
-      })();
-
-    </script>
-
-    
-
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

@@ -11,52 +11,78 @@ format:
     title-slide-attributes:
       data-background-image: img/image-77fixed.png
       data-background-size: cover  
+bibliography: cite.bib
 editor: visual
 ---
 
 ## Introduction
 
-::: columns
+::::: columns
 ::: {.column width="40%"}
-
-![Outliers](img/happyoutlier.jpg)  <!-- Happy outliers -->
+![Outliers](img/happyoutlier.jpg) <!-- Happy outliers -->
 :::
 
 ::: {.column width="60%"}
+-   Anomaly detection is the process of identifying patterns in data that do not conform to expected behavior.
 
-*   Anomaly detection is the process of identifying patterns in data that do not conform to expected behavior. 
+-   The definition of an anomaly is that it is unusual (or not normal).
 
-*   The definition of an anomaly is that it is unusual (or not normal).
+    -   This definition is super-helpful (sarcasm)!
 
-*   This definition is super-helpful (sarcasm)!
-
+-   Formal definition "Anomaly detection refers to the problem of finding patterns in data that do not conform to expected behavior." [@chandola2009anomaly]
 :::
-:::
+:::::
 
+## Why should you care?
 
-## Motivation, Why should you care? 
-
-::: columns
+::::: columns
 ::: {.column width="60%"}
-
-
-* Business Opportunity: Australia’s anti-money laundering and counter-terrorism financing reform is coming soon...
-    + System Modernization 
-    + Scope to include trench 2 entries  (real estate professionals, lawyers, accountants, trust and company service providers)
-    
-* Enrich your knowledge: Anomaly Detection is one of main branches of Data Mining, beside Supervised Learning, Clustering and Association Rules.
-
+-   Business Opportunity: Australia’s anti-money laundering and counter-terrorism financing reform is coming soon...
+    -   System Modernization
+    -   Scope to include trench 2 entries (real estate professionals, lawyers, accountants, trust and company service providers)
+-   Enrich your knowledge: Anomaly Detection is one of main branches of Data Mining, beside Supervised Learning, Clustering and Association Rules.
 :::
 
 ::: {.column width="40%"}
-![Anti-Money Laundering](img/anti-money-laundering.png)  
+![Anti-Money Laundering](img/anti-money-laundering.png)
+:::
+:::::
+
+## What are Anomalies?
+::::: columns
+::: {.column width="50%"}
+A simple example of anomalies in a 2-dimensional dataset
+![A Simple example of anomalies in a 2-dimensional dataset.](img/2Danomalies.png)
 
 :::
+::: {.column width="50%"}
+
+A simple example of anomalies in a 2-dimensional dataset.
+$N_1$ and $N_1$ are normal regions. $o_1$ and $o_2$ are points that are sufficiently far away from these regions.  $o_3$ are clustered anomalies. 
+
+#### Examples of real-life anomalies:
+
+* Credit card frauds
+* Insurance frauds
+* Cyber-intrusions 
+* Terrorist activities
+* System breakdowns 
+
 :::
-## Code
 
-When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
+:::::
 
-```{r}
-1 + 1
-```
+## Challenges of Anomaly Detection
+* Defining a normal region which encompasses every possible normal behavior is very difficult.
+* The Masking and Swamping problems - Anoamlies are hidding among normal points or increase their frequency to appear like normal points.
+* The concept draft problem - normal/anomaly behavior keeps evolving.
+* The notions of anomaly are different for different applications.
+* Availability of labelled data is a major issue - for training/validation of models.
+* Often data naturally contains noise, which are very similar to anomalies. [@chandola2009anomaly]
+
+
+## How to detect Anomalies?
+
+## Questions
+
+

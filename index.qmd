@@ -49,40 +49,56 @@ editor: visual
 :::::
 
 ## What are Anomalies?
+
 ::::: columns
-::: {.column width="50%"}
-A simple example of anomalies in a 2-dimensional dataset
-![A Simple example of anomalies in a 2-dimensional dataset.](img/2Danomalies.png)
+::: {.column width="60%"}
+<img src="img/2Danomalies.png" alt="A Simple example of anomalies in a 2-dimensional dataset." style="width:50%; height:auto;"/>
 
+A simple example of anomalies in a 2-dimensional dataset. $N_1$ and $N_1$ are normal regions. $o_1$ and $o_2$ are points that are sufficiently far away from these regions. $O_3$ are clustered anomalies.
 :::
-::: {.column width="50%"}
 
-A simple example of anomalies in a 2-dimensional dataset.
-$N_1$ and $N_1$ are normal regions. $o_1$ and $o_2$ are points that are sufficiently far away from these regions.  $o_3$ are clustered anomalies. 
-
+::: {.column width="40%"}
 #### Examples of real-life anomalies:
 
-* Credit card frauds
-* Insurance frauds
-* Cyber-intrusions 
-* Terrorist activities
-* System breakdowns 
-
+-   Credit card frauds
+-   Insurance frauds
+-   Cyber-intrusions
+-   Terrorist activities
+-   System breakdowns
 :::
-
 :::::
 
 ## Challenges of Anomaly Detection
-* Defining a normal region which encompasses every possible normal behavior is very difficult.
-* The Masking and Swamping problems - Anoamlies are hidding among normal points or increase their frequency to appear like normal points.
-* The concept draft problem - normal/anomaly behavior keeps evolving.
-* The notions of anomaly are different for different applications.
-* Availability of labelled data is a major issue - for training/validation of models.
-* Often data naturally contains noise, which are very similar to anomalies. [@chandola2009anomaly]
+
+-   **Defining a normal region is very difficult,** because it needs to encompass every possible normal behaviors.
+-   **The Masking and Swamping problems** - Anoamlies are harder to be detected when hidding among normal points or increase their frequency to appear like normal points.
+-   **The concept draft problem** - normal/anomaly behavior keeps evolving.
+-   **The notions of anomaly are not the same** in different applications.
+-   **Availability of labelled data is a major issue** - for training/validation of models.
+-   **Often data naturally contains noise**, which are very similar to anomalies, making them harder to be detected. [@chandola2009anomaly]
+
+## How to detect Anomalies? What are the Applications?
+::::: columns
+::: {.column width="50%"}
+### Major Techniques
+* Classification Based
+* Clustering Based 
+* Nearest Neighbor Based 
+* Statistical Based 
+
+[@chandola2009anomaly]
+:::
+::: {.column width="50%"}
+### Applications
+* Cyber-Intrusion Detection 
+* Fraud Detection
+* Medical Anomaly Detection 
+* Industrial Damage Detection 
+* Image Processing
 
 
-## How to detect Anomalies?
+:::
+:::::
+
 
 ## Questions
-
-

@@ -364,12 +364,12 @@
 <p><img data-src="img/happyoutlier.jpg" alt="Outliers"> <!-- Happy outliers --></p>
 </div><div class="column" style="width:60%;">
 <ul>
-<li class="fragment"><p>Anomaly detection is the process of identifying patterns in data that do not conform to expected behavior.</p></li>
-<li class="fragment"><p>The definition of an anomaly is that it is unusual (or not normal).</p>
+<li><p>Anomaly detection is the process of identifying patterns in data that do not conform to expected behavior.</p></li>
+<li><p>The definition of an anomaly is that it is unusual (or not normal).</p>
 <ul>
-<li class="fragment">This definition is super-helpful (sarcasm)!</li>
+<li>This definition is super-helpful (sarcasm)!</li>
 </ul></li>
-<li class="fragment"><p>Formal definition “Anomaly detection refers to the problem of finding patterns in data that do not conform to expected behavior.” <span class="citation" data-cites="chandola2009anomaly">(<a href="#/questions" role="doc-biblioref" onclick="">Chandola, Banerjee, and Kumar 2009</a>)</span></p></li>
+<li><p>Formal definition “Anomaly detection refers to the problem of finding patterns in data that do not conform to expected behavior.” <span class="citation" data-cites="chandola2009anomaly">(<a href="#/questions" role="doc-biblioref" onclick="">Chandola, Banerjee, and Kumar 2009</a>)</span></p></li>
 </ul>
 </div></div>
 </section>
@@ -378,12 +378,12 @@
 <div class="columns">
 <div class="column" style="width:60%;">
 <ul>
-<li class="fragment">Business Opportunity: Australia’s anti-money laundering and counter-terrorism financing reform is coming soon…
+<li>Business Opportunity: Australia’s anti-money laundering and counter-terrorism financing reform is coming soon…
 <ul>
-<li class="fragment">System Modernization</li>
-<li class="fragment">Scope to include trench 2 entries (real estate professionals, lawyers, accountants, trust and company service providers)</li>
+<li>System Modernization</li>
+<li>Scope to include trench 2 entries (real estate professionals, lawyers, accountants, trust and company service providers)</li>
 </ul></li>
-<li class="fragment">Enrich your knowledge: Anomaly Detection is one of main branches of Data Mining, beside Supervised Learning, Clustering and Association Rules.</li>
+<li>Enrich your knowledge: Anomaly Detection is one of main branches of Data Mining, beside Supervised Learning, Clustering and Association Rules.</li>
 </ul>
 </div><div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
@@ -397,30 +397,53 @@
 <section id="what-are-anomalies" class="slide level2">
 <h2>What are Anomalies?</h2>
 <div class="columns">
-<div class="column" style="width:50%;">
-<p>A simple example of anomalies in a 2-dimensional dataset <img data-src="img/2Danomalies.png" alt="A Simple example of anomalies in a 2-dimensional dataset."></p>
-</div><div class="column" style="width:50%;">
-<p>A simple example of anomalies in a 2-dimensional dataset. <span class="math inline">\(N_1\)</span> and <span class="math inline">\(N_1\)</span> are normal regions. <span class="math inline">\(o_1\)</span> and <span class="math inline">\(o_2\)</span> are points that are sufficiently far away from these regions. <span class="math inline">\(o_3\)</span> are clustered anomalies.</p>
+<div class="column" style="width:60%;">
+<p><img src="img/2Danomalies.png" alt="A Simple example of anomalies in a 2-dimensional dataset." style="width:50%; height:auto;"></p>
+<p>A simple example of anomalies in a 2-dimensional dataset. <span class="math inline">\(N_1\)</span> and <span class="math inline">\(N_1\)</span> are normal regions. <span class="math inline">\(o_1\)</span> and <span class="math inline">\(o_2\)</span> are points that are sufficiently far away from these regions. <span class="math inline">\(O_3\)</span> are clustered anomalies.</p>
+</div><div class="column" style="width:40%;">
 <h4 id="examples-of-real-life-anomalies">Examples of real-life anomalies:</h4>
 <ul>
-<li class="fragment">Credit card frauds</li>
-<li class="fragment">Insurance frauds</li>
-<li class="fragment">Cyber-intrusions</li>
-<li class="fragment">Terrorist activities</li>
-<li class="fragment">System breakdowns</li>
+<li>Credit card frauds</li>
+<li>Insurance frauds</li>
+<li>Cyber-intrusions</li>
+<li>Terrorist activities</li>
+<li>System breakdowns</li>
 </ul>
 </div></div>
 </section>
 <section id="challenges-of-anomaly-detection" class="slide level2">
 <h2>Challenges of Anomaly Detection</h2>
 <ul>
-<li class="fragment">Defining a normal region which encompasses every possible normal behavior is very difficult.</li>
-<li class="fragment">The Masking and Swamping problems - Anoamlies are hidding among normal points or increase their frequency to appear like normal points.</li>
-<li class="fragment">The concept draft problem - normal/anomaly behavior keeps evolving.</li>
-<li class="fragment">The notions of anomaly are different for different applications.</li>
-<li class="fragment">Availability of labelled data is a major issue - for training/validation of models.</li>
-<li class="fragment">Often data naturally contains noise, which are very similar to anomalies. <span class="citation" data-cites="chandola2009anomaly">(<a href="#/questions" role="doc-biblioref" onclick="">Chandola, Banerjee, and Kumar 2009</a>)</span></li>
+<li><strong>Defining a normal region is very difficult,</strong> because it needs to encompass every possible normal behaviors.</li>
+<li><strong>The Masking and Swamping problems</strong> - Anoamlies are harder to be detected when hidding among normal points or increase their frequency to appear like normal points.</li>
+<li><strong>The concept draft problem</strong> - normal/anomaly behavior keeps evolving.</li>
+<li><strong>The notions of anomaly are not the same</strong> in different applications.</li>
+<li><strong>Availability of labelled data is a major issue</strong> - for training/validation of models.</li>
+<li><strong>Often data naturally contains noise</strong>, which are very similar to anomalies, making them harder to be detected. <span class="citation" data-cites="chandola2009anomaly">(<a href="#/questions" role="doc-biblioref" onclick="">Chandola, Banerjee, and Kumar 2009</a>)</span></li>
 </ul>
+</section>
+<section id="how-to-detect-anomalies-what-are-the-applications" class="slide level2">
+<h2>How to detect Anomalies? What are the Applications?</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h3 id="major-techniques">Major Techniques</h3>
+<ul>
+<li>Classification Based</li>
+<li>Clustering Based</li>
+<li>Nearest Neighbor Based</li>
+<li>Statistical Based</li>
+</ul>
+<p><span class="citation" data-cites="chandola2009anomaly">(<a href="#/questions" role="doc-biblioref" onclick="">Chandola, Banerjee, and Kumar 2009</a>)</span></p>
+</div><div class="column" style="width:50%;">
+<h3 id="applications">Applications</h3>
+<ul>
+<li>Cyber-Intrusion Detection</li>
+<li>Fraud Detection</li>
+<li>Medical Anomaly Detection</li>
+<li>Industrial Damage Detection</li>
+<li>Image Processing</li>
+</ul>
+</div></div>
 </section>
 <section id="questions" class="slide level2 smaller scrollable">
 <h2>Questions</h2>

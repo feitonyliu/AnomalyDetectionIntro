@@ -29,6 +29,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     /* CSS for citations */
     div.csl-bib-body { }
     div.csl-entry {
@@ -340,6 +405,10 @@
       margin-right: 0; 
     }
   </style>
+  <script src="index_files/libs/kePrint-0.0.1/kePrint.js"></script>
+
+  <link href="index_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -456,6 +525,7 @@
 <figcaption>Overview of outlier detection methods <span class="citation" data-cites="scikitoutiler">(<a href="#/questions" role="doc-biblioref" onclick="">Scikit-Learn 2024</a>)</span></figcaption>
 </figure>
 </div>
+<p><a href="https://scikit-learn.org/stable/auto_examples/miscellaneous/plot_anomaly_comparison.html">Coding can be found here.</a></p>
 </div><div class="column" style="width:60%;">
 <ul>
 <li class="fragment"><p><strong>Robust Covariance</strong> (Statistical Based) fits a gaussian distribution to the dataset.</p></li>
@@ -464,6 +534,180 @@
 <li class="fragment"><p><strong>Local Outlier Factor</strong> (Nearest Neighbour Based) calculates pairwise distance in order to find points that have higher local outlier factor as anomalies.</p></li>
 </ul>
 </div></div>
+</section>
+<section id="isotree---fast-isolation-forest-in-c" class="slide level2">
+<h2>IsoTree - Fast Isolation Forest in C++</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb1-2"><a href=""></a>random_numbers <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">1000</span>))</span>
+<span id="cb1-3"><a href=""></a><span class="fu">par</span>(<span class="at">oma =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span>))</span>
+<span id="cb1-4"><a href=""></a><span class="fu">hist</span>(random_numbers, <span class="at">breaks=</span><span class="dv">50</span>, <span class="at">col=</span><span class="st">"navy"</span>,</span>
+<span id="cb1-5"><a href=""></a>     <span class="at">main=</span><span class="st">"Randomly-generated numbers</span><span class="sc">\n</span><span class="st">from normal distribution"</span>,</span>
+<span id="cb1-6"><a href=""></a>     <span class="at">xlab=</span><span class="st">"value"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="fu">library</span>(isotree)</span>
+<span id="cb2-2"><a href=""></a></span>
+<span id="cb2-3"><a href=""></a>model <span class="ot">&lt;-</span> <span class="fu">isolation.forest</span>(random_numbers, <span class="at">ndim=</span><span class="dv">1</span>, <span class="at">ntrees=</span><span class="dv">10</span>, <span class="at">nthreads=</span><span class="dv">1</span>)</span>
+<span id="cb2-4"><a href=""></a>scores <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, random_numbers, <span class="at">type=</span><span class="st">"avg_depth"</span>)</span>
+<span id="cb2-5"><a href=""></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">2</span>))</span>
+<span id="cb2-6"><a href=""></a><span class="fu">plot</span>(random_numbers, scores, <span class="at">type=</span><span class="st">"p"</span>, <span class="at">col=</span><span class="st">"darkred"</span>,</span>
+<span id="cb2-7"><a href=""></a>     <span class="at">main=</span><span class="st">"Average isolation depth</span><span class="sc">\n</span><span class="st">for normally-distributed numbers"</span>,</span>
+<span id="cb2-8"><a href=""></a>     <span class="at">xlab=</span><span class="st">"value"</span>, <span class="at">ylab=</span><span class="st">"Average isolation depth"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="an-example-in-2d" class="slide level2">
+<h2>An example in 2D</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="co"># Randomly-generated data from different distributions</span></span>
+<span id="cb3-2"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb3-3"><a href=""></a>cluster1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb3-4"><a href=""></a>    <span class="at">x =</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="sc">-</span><span class="dv">1</span>, .<span class="dv">4</span>),</span>
+<span id="cb3-5"><a href=""></a>    <span class="at">y =</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="sc">-</span><span class="dv">1</span>, .<span class="dv">2</span>)</span>
+<span id="cb3-6"><a href=""></a>)</span>
+<span id="cb3-7"><a href=""></a>cluster2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb3-8"><a href=""></a>    <span class="at">x =</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="sc">+</span><span class="dv">1</span>, .<span class="dv">2</span>),</span>
+<span id="cb3-9"><a href=""></a>    <span class="at">y =</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="sc">+</span><span class="dv">1</span>, .<span class="dv">4</span>)</span>
+<span id="cb3-10"><a href=""></a>)</span>
+<span id="cb3-11"><a href=""></a>outlier <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb3-12"><a href=""></a>    <span class="at">x =</span> <span class="sc">-</span><span class="dv">1</span>,</span>
+<span id="cb3-13"><a href=""></a>    <span class="at">y =</span>  <span class="dv">1</span></span>
+<span id="cb3-14"><a href=""></a>)</span>
+<span id="cb3-15"><a href=""></a></span>
+<span id="cb3-16"><a href=""></a><span class="do">### Putting them together</span></span>
+<span id="cb3-17"><a href=""></a>X <span class="ot">&lt;-</span> <span class="fu">rbind</span>(cluster1, cluster2, outlier)</span>
+<span id="cb3-18"><a href=""></a></span>
+<span id="cb3-19"><a href=""></a><span class="do">### Function to produce a heatmap of the scores</span></span>
+<span id="cb3-20"><a href=""></a>pts <span class="ot">=</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">3</span>, .<span class="dv">1</span>)</span>
+<span id="cb3-21"><a href=""></a>space_d <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">x =</span> pts, <span class="at">y =</span> pts)</span>
+<span id="cb3-22"><a href=""></a>plot.space <span class="ot">&lt;-</span> <span class="cf">function</span>(Z, ttl, <span class="at">cex.main =</span> <span class="fl">1.4</span>) {</span>
+<span id="cb3-23"><a href=""></a>    <span class="fu">image</span>(pts, pts, <span class="fu">matrix</span>(Z, <span class="at">nrow =</span> <span class="fu">length</span>(pts)),</span>
+<span id="cb3-24"><a href=""></a>          <span class="at">col =</span> <span class="fu">rev</span>(<span class="fu">heat.colors</span>(<span class="dv">50</span>)),</span>
+<span id="cb3-25"><a href=""></a>          <span class="at">main =</span> ttl, <span class="at">cex.main =</span> cex.main,</span>
+<span id="cb3-26"><a href=""></a>          <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">3</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">3</span>),</span>
+<span id="cb3-27"><a href=""></a>          <span class="at">xlab =</span> <span class="st">""</span>, <span class="at">ylab =</span> <span class="st">""</span>)</span>
+<span id="cb3-28"><a href=""></a>    <span class="fu">par</span>(<span class="at">new =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-29"><a href=""></a>    <span class="fu">plot</span>(X, <span class="at">type =</span> <span class="st">"p"</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">3</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">3</span>),</span>
+<span id="cb3-30"><a href=""></a>         <span class="at">col =</span> <span class="st">"#0000801A"</span>,</span>
+<span id="cb3-31"><a href=""></a>         <span class="at">axes =</span> <span class="cn">FALSE</span>, <span class="at">main =</span> <span class="st">""</span>,</span>
+<span id="cb3-32"><a href=""></a>         <span class="at">xlab =</span> <span class="st">""</span>, <span class="at">ylab =</span> <span class="st">""</span>)</span>
+<span id="cb3-33"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a>model <span class="ot">&lt;-</span> <span class="fu">isolation.forest</span>(X, <span class="at">ndim=</span><span class="dv">1</span>, <span class="at">ntrees=</span><span class="dv">100</span>, <span class="at">nthreads=</span><span class="dv">1</span>)</span>
+<span id="cb4-2"><a href=""></a>scores <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, space_d)</span>
+<span id="cb4-3"><a href=""></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="fl">2.5</span>,<span class="fl">2.2</span>,<span class="dv">2</span>,<span class="fl">2.5</span>))</span>
+<span id="cb4-4"><a href=""></a><span class="fu">plot.space</span>(scores, <span class="st">"Outlier Scores</span><span class="sc">\n</span><span class="st">(clustered data with an outlier on top)"</span>, <span class="fl">1.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="variations-of-isolation-forests" class="slide level2">
+<h2>Variations of Isolation Forests</h2>
+<p><a href="https://htmlpreview.github.io/?https://github.com/david-cortes/isotree/blob/master/inst/doc/An_Introduction_to_Isolation_Forests.html">Coding can be found here.</a></p>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
+<section id="real-life-data---statlog" class="slide level2">
+<h2>Real life data - Statlog</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Statlog/Landsat Satellit dataset from UCI repository. The smallest three classes, i.e.&nbsp;2, 4, 5 are combined to form the outliers class, while all the other classes are combined to form an inlier class.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="fu">library</span>(mlbench)</span>
+<span id="cb5-2"><a href=""></a></span>
+<span id="cb5-3"><a href=""></a><span class="fu">data</span>(<span class="st">"Satellite"</span>)</span>
+<span id="cb5-4"><a href=""></a>is_outlier <span class="ot">&lt;-</span> Satellite<span class="sc">$</span>classes <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"damp grey soil"</span>, <span class="st">"cotton crop"</span>, <span class="st">"vegetation stubble"</span>)</span>
+<span id="cb5-5"><a href=""></a>sat_without_class <span class="ot">&lt;-</span> Satellite[, <span class="fu">names</span>(Satellite)[<span class="fu">names</span>(Satellite) <span class="sc">!=</span> <span class="st">"classes"</span>]]</span>
+<span id="cb5-6"><a href=""></a><span class="fu">dim</span>(sat_without_class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6435   36</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="fu">summary</span>(is_outlier)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Mode   FALSE    TRUE 
+logical    4399    2036 </code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<table class="table caption-top" data-quarto-postprocess="true" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Model</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Time(s)</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">AUROC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Isolation Forest</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">0.691</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Density Isolation Forest</td>
+<td style="text-align: right;">0.02</td>
+<td style="text-align: right;">0.827</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Fair-Cut Forest</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.897</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">One-Class SVM</td>
+<td style="text-align: right;">7.00</td>
+<td style="text-align: right;">0.299</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Local Outlier Factor</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0.490</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div></div>
+</section>
+<section id="area-under-receriver-operating-characteristic-curves" class="slide level2">
+<h2>Area Under Receriver Operating Characteristic Curves</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"><footer>
+<a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic">Learn more about ROC Curves</a>
+</footer>
 </section>
 <section id="questions" class="slide level2 smaller scrollable">
 <h2>Questions</h2>
@@ -694,6 +938,82 @@ Scikit-Learn. 2024. <span>“<span class="nocase">Novelty and Outlier Detection<
         ]
       });
     </script>
+    
+
+    <script>
+
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
+      // slide changes (different for each slide format).
+
+      (function () {
+
+        // dispatch for htmlwidgets
+
+        function fireSlideEnter() {
+
+          const event = window.document.createEvent("Event");
+
+          event.initEvent("slideenter", true, true);
+
+          window.document.dispatchEvent(event);
+
+        }
+
+    
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          fireSlideEnter();
+
+    
+
+          // dispatch for shiny
+
+          if (window.jQuery) {
+
+            if (previousSlide) {
+
+              window.jQuery(previousSlide).trigger("hidden");
+
+            }
+
+            if (currentSlide) {
+
+              window.jQuery(currentSlide).trigger("shown");
+
+            }
+
+          }
+
+        }
+
+    
+
+        // hookup for slidy
+
+        if (window.w3c_slidy) {
+
+          window.w3c_slidy.add_observer(function (slide_num) {
+
+            // slide_num starts at position 1
+
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
+          });
+
+        }
+
+    
+
+      })();
+
+    </script>
+
+    
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

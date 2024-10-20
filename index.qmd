@@ -108,6 +108,8 @@ A simple example of anomalies in a 2-dimensional dataset. $N_1$ and $N_1$ are no
 ::::: columns
 ::: {.column width="40%"}
 ![Overview of outlier detection methods [@scikitoutiler]](img/sphx_glr_plot_anomaly_comparison_001.png){width="500"}
+
+[Coding can be found here.](https://scikit-learn.org/stable/auto_examples/miscellaneous/plot_anomaly_comparison.html)
 :::
 
 ::: {.column width="60%"}
@@ -120,5 +122,336 @@ A simple example of anomalies in a 2-dimensional dataset. $N_1$ and $N_1$ are no
 -   **Local Outlier Factor** (Nearest Neighbour Based) calculates pairwise distance in order to find points that have higher local outlier factor as anomalies.
 :::
 :::::
+
+## IsoTree - Fast Isolation Forest in C++
+
+::::: columns
+::: {.column width="50%"}
+```{r}
+#| echo: true
+set.seed(123)
+random_numbers <- matrix(rnorm(1000))
+par(oma = c(0,0,0,0), mar = c(4,4,3,2))
+hist(random_numbers, breaks=50, col="navy",
+     main="Randomly-generated numbers\nfrom normal distribution",
+     xlab="value")
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: true
+library(isotree)
+
+model <- isolation.forest(random_numbers, ndim=1, ntrees=10, nthreads=1)
+scores <- predict(model, random_numbers, type="avg_depth")
+par(mar = c(4,5,3,2))
+plot(random_numbers, scores, type="p", col="darkred",
+     main="Average isolation depth\nfor normally-distributed numbers",
+     xlab="value", ylab="Average isolation depth")
+```
+:::
+:::::
+
+## An example in 2D
+
+::::: columns
+::: {.column width="50%"}
+```{r}
+#| echo: true
+# Randomly-generated data from different distributions
+set.seed(1)
+cluster1 <- data.frame(
+    x = rnorm(1000, -1, .4),
+    y = rnorm(1000, -1, .2)
+)
+cluster2 <- data.frame(
+    x = rnorm(1000, +1, .2),
+    y = rnorm(1000, +1, .4)
+)
+outlier <- data.frame(
+    x = -1,
+    y =  1
+)
+
+### Putting them together
+X <- rbind(cluster1, cluster2, outlier)
+
+### Function to produce a heatmap of the scores
+pts = seq(-3, 3, .1)
+space_d <- expand.grid(x = pts, y = pts)
+plot.space <- function(Z, ttl, cex.main = 1.4) {
+    image(pts, pts, matrix(Z, nrow = length(pts)),
+          col = rev(heat.colors(50)),
+          main = ttl, cex.main = cex.main,
+          xlim = c(-3, 3), ylim = c(-3, 3),
+          xlab = "", ylab = "")
+    par(new = TRUE)
+    plot(X, type = "p", xlim = c(-3, 3), ylim = c(-3, 3),
+         col = "#0000801A",
+         axes = FALSE, main = "",
+         xlab = "", ylab = "")
+}
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: true
+model <- isolation.forest(X, ndim=1, ntrees=100, nthreads=1)
+scores <- predict(model, space_d)
+par(mar = c(2.5,2.2,2,2.5))
+plot.space(scores, "Outlier Scores\n(clustered data with an outlier on top)", 1.0)
+```
+:::
+:::::
+
+## Variations of Isolation Forests
+
+[Coding can be found here.](https://htmlpreview.github.io/?https://github.com/david-cortes/isotree/blob/master/inst/doc/An_Introduction_to_Isolation_Forests.html)
+
+```{r}
+par(mfrow = c(3, 2), mar = c(2.5,2.2,2,2.5))
+
+iforest <- isolation.forest(
+    X, ndim=1, ntrees=100,
+    missing_action="fail"
+)
+plot.space(
+    predict(iforest, space_d),
+    "Isolation Forest"
+)
+ext_iforest <- isolation.forest(
+    X, ndim=2, ntrees=100,
+    missing_action="fail"
+)
+plot.space(
+    predict(ext_iforest, space_d),
+    "Extended Isolation Forest"
+)
+sciforest <- isolation.forest(
+    X, ndim=2, ntrees=100,
+    missing_action="fail",
+    coefs="normal",
+    prob_pick_avg_gain=1
+)
+plot.space(
+    predict(sciforest, space_d),
+    "SCiForest"
+)
+fcf <- isolation.forest(
+    X, ndim=2, ntrees=100,
+    missing_action="fail",
+    prob_pick_pooled_gain=1
+)
+plot.space(
+    predict(fcf, space_d),
+    "Fair-Cut Forest"
+)
+dens_iforest <- isolation.forest(
+    X, ndim=2, ntrees=100,
+    missing_action="fail",
+    scoring_metric="density"
+)
+plot.space(
+    predict(dens_iforest, space_d),
+    "Density Isolation Forest"
+)
+bdens_iforest <- isolation.forest(
+    X, ndim=1, ntrees=100,
+    missing_action="fail",
+    scoring_metric="boxed_ratio"
+)
+plot.space(
+    predict(bdens_iforest, space_d),
+    "Boxed Isolation Forest"
+)
+```
+
+## Real life data - Statlog
+
+::::: columns
+::: {.column width="50%"}
+Statlog/Landsat Satellit dataset from UCI repository. The smallest three classes, i.e. 2, 4, 5 are combined to form the outliers class, while all the other classes are combined to form an inlier class.
+
+```{r}
+#| echo: true
+library(mlbench)
+
+data("Satellite")
+is_outlier <- Satellite$classes %in% c("damp grey soil", "cotton crop", "vegetation stubble")
+sat_without_class <- Satellite[, names(Satellite)[names(Satellite) != "classes"]]
+dim(sat_without_class)
+
+```
+
+```{r}
+#| echo: true
+summary(is_outlier)
+
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: false
+library(MLmetrics)
+library(kableExtra)
+library(kernlab)
+library(isotree)
+library(dbscan)  # Load the dbscan package for LOF
+
+# Initialize lists to store AUROC scores and processing times
+auroc_list <- c()
+time_list <- c()
+
+# 1. Isolation Forest
+time_orig <- system.time({
+    model_orig <- isolation.forest(
+        sat_without_class,
+        ndim=1, sample_size=256,
+        ntrees=100,
+        missing_action="fail"
+    )
+    pred_orig <- predict(model_orig, sat_without_class)
+    auroc_orig <- AUC(pred_orig, is_outlier)  # Calculate AUC
+})
+auroc_list <- c(auroc_list, auroc_orig)
+time_list <- c(time_list, time_orig["elapsed"])
+
+# 2. Density Isolation Forest
+time_dens <- system.time({
+    model_dens <- isolation.forest(
+        sat_without_class,
+        ndim=1, sample_size=256,
+        ntrees=100,
+        missing_action="fail",
+        scoring_metric="density"
+    )
+    pred_dens <- predict(model_dens, sat_without_class)
+    auroc_dens <- AUC(pred_dens, is_outlier)  # Calculate AUC
+})
+auroc_list <- c(auroc_list, auroc_dens)
+time_list <- c(time_list, time_dens["elapsed"])
+
+# 3. Fair-Cut Forest
+time_fcf <- system.time({
+    model_fcf <- isolation.forest(
+        sat_without_class,
+        ndim=1, sample_size=32,
+        prob_pick_pooled_gain=1,
+        ntrees=100,
+        missing_action="fail"
+    )
+    pred_fcf <- predict(model_fcf, sat_without_class)
+    auroc_fcf <- AUC(pred_fcf, is_outlier)  # Calculate AUC
+})
+auroc_list <- c(auroc_list, auroc_fcf)
+time_list <- c(time_list, time_fcf["elapsed"])
+
+# 4. One-Class SVM
+time_svm <- system.time({
+    model_svm <- ksvm(
+        as.matrix(sat_without_class),
+        type="one-svc",
+        nu = 0.5
+    )
+    pred_svm <- predict(model_svm, as.matrix(sat_without_class), type="decision")
+    auroc_svm <- AUC(pred_svm, is_outlier)  # Calculate AUC
+})
+auroc_list <- c(auroc_list, auroc_svm)
+time_list <- c(time_list, time_svm["elapsed"])
+
+# 5. Local Outlier Factor (LOF)
+time_lof <- system.time({
+    # Calculate LOF scores
+    lof_scores <- lof(sat_without_class, k = 5)  # Adjust k as needed
+    # Predict outliers (LOF score < 1 indicates normal points)
+    pred_lof <- ifelse(lof_scores < 1, 0, 1)
+    auroc_lof <- AUC(pred_lof, is_outlier)  # Calculate AUC
+})
+auroc_list <- c(auroc_list, auroc_lof)
+time_list <- c(time_list, time_lof["elapsed"])
+
+# Round AUROC scores to 3 decimal places
+auroc_list <- round(auroc_list, 3)
+
+# Create a data frame to store the results
+results_df <- data.frame(
+    Model = c(
+        "Isolation Forest",
+        "Density Isolation Forest",
+        "Fair-Cut Forest",
+        "One-Class SVM",
+        "Local Outlier Factor"
+    ),
+    Time = time_list,
+    AUROC = auroc_list
+)
+
+names(results_df) <- c("Model", "Time(s)", "AUROC")
+
+# Display the results in a styled table
+results_df %>%
+    kable() %>%
+    kable_styling()
+```
+
+```{r}
+
+```
+:::
+:::::
+
+## Area Under Receriver Operating Characteristic Curves
+
+
+```{r}
+library(ggplot2)
+library(plotROC)
+library(dplyr)
+
+# Define a color palette for the models
+colors <- c(
+    "Isolation Forest" = "darkgreen",
+    "Density Isolation Forest" = "red",
+    "Fair-Cut Forest" = "blue",
+    "One-Class SVM" = "purple",
+    "Local Outlier Factor" = "brown"
+)
+
+# Sample Data Preparation (reshaping into long format)
+results_long <- data.frame(
+    Model = rep(results_df$Model, each = length(pred_orig)),
+    prediction = c(pred_orig, pred_dens, pred_fcf, pred_svm, pred_lof),
+    outcome = rep(is_outlier, 5)
+)
+
+# Draw ROC Plots
+roc_plot <- ggplot(results_long, aes(d = outcome, m = prediction, color = Model)) +
+  geom_roc(n.cuts = 0) + 
+  style_roc(theme = theme_bw, xlab = "1-Specificity", ylab = "Sensitivity") +
+  scale_color_manual(values = colors)  # Use the defined color palette
+
+# Calculate AUCs for each model
+auc_vals <- calc_auc(roc_plot)
+
+# Annotate the plot with AUC values using the defined colors
+annotate_plot <- roc_plot + 
+  ggtitle("ROC plots for Five Models") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  annotate("text", x = 0.75, y = 0.25, label = paste("AUC (Density Isolation Forest) =", round(auc_vals$AUC[2], 3)), color = colors["Density Isolation Forest"]) +  # Density Isolation Forest
+    annotate("text", x = 0.75, y = 0.2, label = paste("AUC (Fair-Cut Forest) =", round(auc_vals$AUC[3], 3)), color = colors["Fair-Cut Forest"]) +  # Fair-Cut Forest
+  annotate("text", x = 0.75, y = 0.15, label = paste("AUC (Isolation Forest) =", round(auc_vals$AUC[1], 3)), color = colors["Isolation Forest"]) +  # Isolation Forest
+  annotate("text", x = 0.75, y = 0.1, label = paste("AUC (Local Outlier Factor) =", round(auc_vals$AUC[5], 3)), color = colors["Local Outlier Factor"]) +  # LOF
+  annotate("text", x = 0.75, y = 0.05, label = paste("AUC (One-Class SVM) =", round(auc_vals$AUC[4], 3)), color = colors["One-Class SVM"])   # SVM
+
+
+# Display the plot
+annotate_plot
+
+```
+<footer> [Learn more about ROC Curves](https://en.wikipedia.org/wiki/Receiver_operating_characteristic) </footer> 
+
 
 ## Questions

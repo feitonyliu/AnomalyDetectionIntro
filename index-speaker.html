@@ -364,12 +364,12 @@
 <p><img data-src="img/happyoutlier.jpg" alt="Outliers"> <!-- Happy outliers --></p>
 </div><div class="column" style="width:60%;">
 <ul>
-<li><p>Anomaly detection is the process of identifying patterns in data that do not conform to expected behavior.</p></li>
-<li><p>The definition of an anomaly is that it is unusual (or not normal).</p>
+<li class="fragment"><p>Anomaly detection is the process of identifying patterns in data that do not conform to expected behavior.</p></li>
+<li class="fragment"><p>The definition of an anomaly is that it is unusual (or not normal).</p>
 <ul>
-<li>This definition is super-helpful (sarcasm)!</li>
+<li class="fragment">This definition is super-helpful (sarcasm)!</li>
 </ul></li>
-<li><p>Formal definition “Anomaly detection refers to the problem of finding patterns in data that do not conform to expected behavior.” <span class="citation" data-cites="chandola2009anomaly">(<a href="#/questions" role="doc-biblioref" onclick="">Chandola, Banerjee, and Kumar 2009</a>)</span></p></li>
+<li class="fragment"><p>Formal definition “Anomaly detection refers to the problem of finding patterns in data that do not conform to expected behavior.” <span class="citation" data-cites="chandola2009anomaly">(<a href="#/questions" role="doc-biblioref" onclick="">Chandola, Banerjee, and Kumar 2009</a>)</span></p></li>
 </ul>
 </div></div>
 </section>
@@ -378,12 +378,12 @@
 <div class="columns">
 <div class="column" style="width:60%;">
 <ul>
-<li>Business Opportunity: Australia’s anti-money laundering and counter-terrorism financing reform is coming soon…
+<li class="fragment">Business Opportunity: Australia’s anti-money laundering and counter-terrorism financing reform is coming soon…
 <ul>
-<li>System Modernization</li>
-<li>Scope to include trench 2 entries (real estate professionals, lawyers, accountants, trust and company service providers)</li>
+<li class="fragment">System Modernization</li>
+<li class="fragment">Scope to include trench 2 entries (real estate professionals, lawyers, accountants, trust and company service providers)</li>
 </ul></li>
-<li>Enrich your knowledge: Anomaly Detection is one of main branches of Data Mining, beside Supervised Learning, Clustering and Association Rules.</li>
+<li class="fragment">Enrich your knowledge: Anomaly Detection is one of main branches of Data Mining, beside Supervised Learning, Clustering and Association Rules.</li>
 </ul>
 </div><div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
@@ -403,23 +403,23 @@
 </div><div class="column" style="width:40%;">
 <h4 id="examples-of-real-life-anomalies">Examples of real-life anomalies:</h4>
 <ul>
-<li>Credit card frauds</li>
-<li>Insurance frauds</li>
-<li>Cyber-intrusions</li>
-<li>Terrorist activities</li>
-<li>System breakdowns</li>
+<li class="fragment">Credit card frauds</li>
+<li class="fragment">Insurance frauds</li>
+<li class="fragment">Cyber-intrusions</li>
+<li class="fragment">Terrorist activities</li>
+<li class="fragment">System breakdowns</li>
 </ul>
 </div></div>
 </section>
 <section id="challenges-of-anomaly-detection" class="slide level2">
 <h2>Challenges of Anomaly Detection</h2>
 <ul>
-<li><strong>Defining a normal region is very difficult,</strong> because it needs to encompass every possible normal behaviors.</li>
-<li><strong>The Masking and Swamping problems</strong> - Anoamlies are harder to be detected when hidding among normal points or increase their frequency to appear like normal points.</li>
-<li><strong>The concept draft problem</strong> - normal/anomaly behavior keeps evolving.</li>
-<li><strong>The notions of anomaly are not the same</strong> in different applications.</li>
-<li><strong>Availability of labelled data is a major issue</strong> - for training/validation of models.</li>
-<li><strong>Often data naturally contains noise</strong>, which are very similar to anomalies, making them harder to be detected. <span class="citation" data-cites="chandola2009anomaly">(<a href="#/questions" role="doc-biblioref" onclick="">Chandola, Banerjee, and Kumar 2009</a>)</span></li>
+<li class="fragment"><strong>Defining a normal region is very difficult,</strong> because it needs to encompass every possible normal behaviors.</li>
+<li class="fragment"><strong>The Masking and Swamping problems</strong> - Anoamlies are harder to be detected when hidding among normal points or increase their frequency to appear like normal points.</li>
+<li class="fragment"><strong>The concept draft problem</strong> - normal/anomaly behavior keeps evolving.</li>
+<li class="fragment"><strong>The notions of anomaly are not the same</strong> in different applications.</li>
+<li class="fragment"><strong>Availability of labelled data is a major issue</strong> - for training/validation of models.</li>
+<li class="fragment"><strong>Often data naturally contains noise</strong>, which are very similar to anomalies, making them harder to be detected. <span class="citation" data-cites="chandola2009anomaly">(<a href="#/questions" role="doc-biblioref" onclick="">Chandola, Banerjee, and Kumar 2009</a>)</span></li>
 </ul>
 </section>
 <section id="how-to-detect-anomalies-what-are-the-applications" class="slide level2">
@@ -428,20 +428,40 @@
 <div class="column" style="width:50%;">
 <h3 id="major-techniques">Major Techniques</h3>
 <ul>
-<li>Classification Based</li>
-<li>Clustering Based</li>
-<li>Nearest Neighbor Based</li>
-<li>Statistical Based</li>
+<li class="fragment">Classification Based</li>
+<li class="fragment">Clustering Based</li>
+<li class="fragment">Nearest Neighbor Based</li>
+<li class="fragment">Statistical Based</li>
+<li class="fragment">Isolation Based</li>
 </ul>
 <p><span class="citation" data-cites="chandola2009anomaly">(<a href="#/questions" role="doc-biblioref" onclick="">Chandola, Banerjee, and Kumar 2009</a>)</span></p>
 </div><div class="column" style="width:50%;">
 <h3 id="applications">Applications</h3>
 <ul>
-<li>Cyber-Intrusion Detection</li>
-<li>Fraud Detection</li>
-<li>Medical Anomaly Detection</li>
-<li>Industrial Damage Detection</li>
-<li>Image Processing</li>
+<li class="fragment">Cyber-Intrusion Detection</li>
+<li class="fragment">Fraud Detection</li>
+<li class="fragment">Medical Anomaly Detection</li>
+<li class="fragment">Industrial Damage Detection</li>
+<li class="fragment">Image Processing</li>
+</ul>
+</div></div>
+</section>
+<section id="libraries-for-anomaly-detection" class="slide level2">
+<h2>Libraries for Anomaly Detection</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/sphx_glr_plot_anomaly_comparison_001.png" width="500"></p>
+<figcaption>Overview of outlier detection methods <span class="citation" data-cites="scikitoutiler">(<a href="#/questions" role="doc-biblioref" onclick="">Scikit-Learn 2024</a>)</span></figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:60%;">
+<ul>
+<li class="fragment"><p><strong>Robust Covariance</strong> (Statistical Based) fits a gaussian distribution to the dataset.</p></li>
+<li class="fragment"><p><strong>One-Class SVM</strong> (Classification Based) generalizes a hyperplane from the data for a decision boundary that include as much data points as possible.</p></li>
+<li class="fragment"><p><strong>Isolation Forest</strong> (Isolation Based) builds multiple randomly generated binary trees from sample of the data. Points having short pathlength are anomalies.</p></li>
+<li class="fragment"><p><strong>Local Outlier Factor</strong> (Nearest Neighbour Based) calculates pairwise distance in order to find points that have higher local outlier factor as anomalies.</p></li>
 </ul>
 </div></div>
 </section>
@@ -455,6 +475,9 @@
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-chandola2009anomaly" class="csl-entry" role="listitem">
 Chandola, Varun, Arindam Banerjee, and Vipin Kumar. 2009. <span>“Anomaly Detection: A Survey.”</span> <em>ACM Computing Surveys (CSUR)</em> 41 (3): 15. <a href="http://scholar.google.de/scholar.bib?q=info:jAfBmk-9uAcJ:scholar.google.com/&amp;output=citation&amp;hl=de&amp;ct=citation&amp;cd=0">http://scholar.google.de/scholar.bib?q=info:jAfBmk-9uAcJ:scholar.google.com/&amp;output=citation&amp;hl=de&amp;ct=citation&amp;cd=0</a>.
+</div>
+<div id="ref-scikitoutiler" class="csl-entry" role="listitem">
+Scikit-Learn. 2024. <span>“<span class="nocase">Novelty and Outlier Detection</span>.”</span> <a href="https://scikit-learn.org/stable/modules/outlier_detection.html" class="uri">https://scikit-learn.org/stable/modules/outlier_detection.html</a>.
 </div>
 </div>
 </section>

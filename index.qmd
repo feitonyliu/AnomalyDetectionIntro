@@ -78,27 +78,47 @@ A simple example of anomalies in a 2-dimensional dataset. $N_1$ and $N_1$ are no
 -   **Often data naturally contains noise**, which are very similar to anomalies, making them harder to be detected. [@chandola2009anomaly]
 
 ## How to detect Anomalies? What are the Applications?
+
 ::::: columns
 ::: {.column width="50%"}
 ### Major Techniques
-* Classification Based
-* Clustering Based 
-* Nearest Neighbor Based 
-* Statistical Based 
+
+-   Classification Based
+-   Clustering Based
+-   Nearest Neighbor Based
+-   Statistical Based
+-   Isolation Based
 
 [@chandola2009anomaly]
 :::
+
 ::: {.column width="50%"}
 ### Applications
-* Cyber-Intrusion Detection 
-* Fraud Detection
-* Medical Anomaly Detection 
-* Industrial Damage Detection 
-* Image Processing
 
-
+-   Cyber-Intrusion Detection
+-   Fraud Detection
+-   Medical Anomaly Detection
+-   Industrial Damage Detection
+-   Image Processing
 :::
 :::::
 
+## Libraries for Anomaly Detection
+
+::::: columns
+::: {.column width="40%"}
+![Overview of outlier detection methods [@scikitoutiler]](img/sphx_glr_plot_anomaly_comparison_001.png){width="500"}
+:::
+
+::: {.column width="60%"}
+-   **Robust Covariance** (Statistical Based) fits a gaussian distribution to the dataset.
+
+-   **One-Class SVM** (Classification Based) generalizes a hyperplane from the data for a decision boundary that include as much data points as possible.
+
+-   **Isolation Forest** (Isolation Based) builds multiple randomly generated binary trees from sample of the data. Points having short pathlength are anomalies.
+
+-   **Local Outlier Factor** (Nearest Neighbour Based) calculates pairwise distance in order to find points that have higher local outlier factor as anomalies.
+:::
+:::::
 
 ## Questions

@@ -123,6 +123,30 @@ A simple example of anomalies in a 2-dimensional dataset. $N_1$ and $N_1$ are no
 :::
 :::::
 
+## Isolation Forest
+
+::::: columns
+::: {.column width="50%"}
+Definition: 
+
+Anomalies are **few** and **different**
+
+![Normal points need more partitions to be isolated, Anomalies require fewer.](img/Isolation-Forest-a-A-normal-point-requires-twelve-random-partitions-to-be-isolated.png){width="500"}
+
+
+
+:::
+
+::: {.column width="50%"}
+
+
+![Path length(No of partitions) converges with increasing number of trees. [@LiuTZ08]](img/PathLengthConverge.png){width="500"}
+
+
+
+:::
+:::::
+
 ## IsoTree - Fast Isolation Forest in C++
 
 ::::: columns
@@ -208,8 +232,6 @@ plot.space(scores, "Outlier Scores\n(clustered data with an outlier on top)", 1.
 
 ## Variations of Isolation Forests
 
-[Coding can be found here.](https://htmlpreview.github.io/?https://github.com/david-cortes/isotree/blob/master/inst/doc/An_Introduction_to_Isolation_Forests.html)
-
 ```{r}
 par(mfrow = c(3, 2), mar = c(2.5,2.2,2,2.5))
 
@@ -267,6 +289,8 @@ plot.space(
     "Boxed Isolation Forest"
 )
 ```
+
+[Coding can be found here.](https://htmlpreview.github.io/?https://github.com/david-cortes/isotree/blob/master/inst/doc/An_Introduction_to_Isolation_Forests.html)
 
 ## Real life data - Statlog
 
@@ -403,8 +427,7 @@ results_df %>%
 :::
 :::::
 
-## Area Under Receriver Operating Characteristic Curves
-
+## Area Under Receiver Operating Characteristic Curves (AUROC)
 
 ```{r}
 library(ggplot2)
@@ -451,7 +474,7 @@ annotate_plot <- roc_plot +
 annotate_plot
 
 ```
-<footer> [Learn more about ROC Curves](https://en.wikipedia.org/wiki/Receiver_operating_characteristic) </footer> 
 
+[Learn more about ROC Curves](https://en.wikipedia.org/wiki/Receiver_operating_characteristic)
 
 ## Questions
